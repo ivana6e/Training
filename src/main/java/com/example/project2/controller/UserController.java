@@ -9,8 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -21,8 +20,8 @@ public class UserController {
     private RegisterApiUseCase registerApiUseCase;
 
     @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody UserModel userModel) {
-        return registerApiUseCase.createUser(userModel);
+    public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
+        return registerApiUseCase.createUser(request);
     }
 
 
@@ -59,7 +58,7 @@ public class UserController {
     private GetApiUseCase getApiUseCase;
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserModel> getUser(@PathVariable long id) {
+    public ResponseEntity<?> getUser(@PathVariable long id) {
         return getApiUseCase.getUser(id);
     }
 
@@ -74,9 +73,7 @@ public class UserController {
     private UpdateApiUseCase updateApiUseCase;
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<?> updateUser(
-            @PathVariable Long id, @RequestBody UserModel request
-    ) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UpdateRequest request) {
         return updateApiUseCase.updateUser(id, request);
     }
 
@@ -88,24 +85,5 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         return deleteApiUseCase.deleteUser(id);
-    }
-
-
-    //------------------------------------------------------------------
-
-
-    @GetMapping("/cart")
-    public String cart() {
-        return "cart";
-    }
-
-    @GetMapping("/order")
-    public String order() {
-        return "order";
-    }
-
-    @GetMapping("/other")
-    public String other() {
-        return "other";
     }
 }

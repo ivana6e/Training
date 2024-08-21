@@ -20,6 +20,7 @@ import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    
     private static final String BEARER_PREFIX = "Bearer ";
 
     @Autowired
@@ -40,7 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Claims claims;
         try {
             claims = jwtUtil.parseToken(jwt);
-        } catch (JwtException e) {
+        }
+        catch(JwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }

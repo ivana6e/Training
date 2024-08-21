@@ -1,8 +1,8 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-
 import com.example.project2.util.UserDetailsImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +21,11 @@ public class DeleteApiUseCase {
 
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if ("anonymousUser".equals(principal)) {
+        if("anonymousUser".equals(principal)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
         }
 
         var userDetails = (UserDetailsImpl) principal;
-
         userDao.deleteById(userDetails.getId());
         return ResponseEntity.noContent().build();
     }

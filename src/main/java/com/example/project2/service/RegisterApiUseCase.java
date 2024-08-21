@@ -1,8 +1,8 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
+import com.example.project2.model.RegisterRequest;
 import com.example.project2.model.RegisterResponse;
-import com.example.project2.model.ResponseDto;
 import com.example.project2.model.UserModel;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
@@ -17,23 +17,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class RegisterApiUseCase {
 
+    private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
     @Autowired
-    private UserDao userDao;
+    public RegisterApiUseCase(UserDao userDao, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    public ResponseEntity<?> createUser(@RequestBody UserModel userModel) {
-        if(userDao.findByUsername(userModel.getUsername()) != null) {
+    public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
+        // revise
+        if(userDao.findByUsername(request.getUsername()) != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("{\n\"status\": -1,\n\"errorMessage\": \"Username already exists\"\n}");
         }
 
-        var encodedPwd = passwordEncoder.encode(userModel.getPassword());
+        UserModel userModel = new UserModel();
+        var encodedPwd = passwordEncoder.encode(request.getPassword());
+        userModel.setUsername(request.getUsername());
         userModel.setPassword(encodedPwd);
-        userModel.setId(null);
+        userModel.setUserAuthorities(request.getUserAuthorities());
         userDao.save(userModel);
 
         UserDetailsImpl user = new UserDetailsImpl(userModel);
@@ -41,6 +45,5 @@ public class RegisterApiUseCase {
 
         // return ResponseEntity.ok(userModel);
         return ResponseEntity.status(HttpStatus.OK).body(RegisterResponse.of(jwt, user));
-
     }
 }

@@ -2,9 +2,13 @@ package com.example.project2.model;
 
 import com.example.project2.util.UserDetailsImpl;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class LoginResponse {
+
     private String jwt;
     private Long id;
     private String username;
@@ -18,21 +22,5 @@ public class LoginResponse {
         res.userAuthorities = user.getUserAuthorities();
 
         return res;
-    }
-
-    public String getJwt() {
-        return jwt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public List<UserAuthority> getUserAuthorities() {
-        return userAuthorities;
     }
 }

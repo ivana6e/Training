@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class LoginApiUseCase {
 
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    public LoginApiUseCase(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+    }
 
     public LoginResponse login(@RequestBody LoginRequest request) {
         var token = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());

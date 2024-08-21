@@ -1,7 +1,7 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-import com.example.project2.model.UserModel;
+import com.example.project2.model.UpdateRequest;
 import com.example.project2.util.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class UpdateApiUseCase {
 
+    private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    private UserDao userDao;
+    public UpdateApiUseCase(UserDao userDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public ResponseEntity<?> updateUser(
-            @PathVariable Long id, @RequestBody UserModel request
-    ) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UpdateRequest request) {
         var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if ("anonymousUser".equals(principal)) {
+        if("anonymousUser".equals(principal)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
         }
 
         var userDetails = (UserDetailsImpl) principal;
-
         var userPO = userDao.findById(userDetails.getId());
         if(userPO.isEmpty()) {
             return ResponseEntity.notFound().build();
