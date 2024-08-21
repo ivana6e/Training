@@ -22,14 +22,17 @@ public class LocaleResolverImpl implements LocaleResolver {
 
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
-        String lang = request.getParameter("lang");
-        Locale locale = Locale.getDefault();
+        String lang = request.getParameter("Accept-Language");
+        Locale locale;
 
         if(!StringUtils.isEmpty(lang)) {
-            String[] s = lang.split("_");
-            locale = new Locale(s[0], s[1]);
+            String[] split = lang.split("-");
+            locale = new Locale(split[0], split[1]);
         }
-
+        else {
+            // host language
+            locale = Locale.getDefault();
+        }
         return locale;
     }
 

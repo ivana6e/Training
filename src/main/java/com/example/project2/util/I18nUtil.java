@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Objects;
 
-@Slf4j
+// @Slf4j
 @Component
 public class I18nUtil {
 
@@ -45,14 +45,16 @@ public class I18nUtil {
         return getMessage(code, null, code, locale);
     }
 
+    // RegisterApiUseCase
     public static String getMessage(String code, String lang) {
         Locale locale;
+
         if(StringUtils.isEmpty(lang)) {
             locale = Locale.UK;
         }
         else {
             try {
-                var split = lang.split("_");
+                var split = lang.split("-");
                 locale = new Locale(split[0], split[1]);
             }
             catch(Exception e) {
@@ -72,14 +74,13 @@ public class I18nUtil {
             content = messageSource.getMessage(code, args, locale);
         }
         catch(Exception e) {
-            log.error("international para acquire fail ===> {}", e.getMessage(), e);
             content = defaultMessage;
         }
         return content;
     }
 
     public static String getStationLetterMessage(String code, String lang) {
-        Locale locale = Objects.equals(lang, "zh_TW") ? Locale.TAIWAN : Locale.UK;
+        Locale locale = Objects.equals(lang, "zh-TW") ? Locale.TRADITIONAL_CHINESE : Locale.UK;
         return getMessage(code, null, code, locale);
     }
 }
