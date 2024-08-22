@@ -25,6 +25,7 @@ public class LocaleResolverImpl implements LocaleResolver {
         String lang = request.getParameter("Accept-Language");
         Locale locale;
 
+        // empty or correct are allowed
         if(!StringUtils.isEmpty(lang)) {
             String[] split = lang.split("-");
             locale = new Locale(split[0], split[1]);

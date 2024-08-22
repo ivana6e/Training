@@ -40,6 +40,7 @@ public class I18nUtil {
         setCustom(resolver);
     }
 
+    // ??
     public static String getMessage(String code) {
         Locale locale = custom.getLocale();
         return getMessage(code, null, code, locale);
@@ -77,6 +78,11 @@ public class I18nUtil {
             content = defaultMessage;
         }
         return content;
+    }
+
+    // new ver
+    public static String getMessage(String code, Locale locale) {
+        return getMessage(code, null, code, locale);
     }
 
     public static String getStationLetterMessage(String code, String lang) {

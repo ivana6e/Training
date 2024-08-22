@@ -40,10 +40,11 @@ public class RegisterApiUseCase {
         // revise
         if(userDao.findByUsername(request.getUsername()) != null) {
             String msg = I18nUtil.getMessage("username.is.taken", httpServletRequest.getHeader("Accept-Language"));
+            // String msg = I18nUtil.getMessage("username.is.taken", LocaleContextHolder.getLocale());
             // String msg = messageSource.getMessage(
             //         "username.is.taken",
             //         new String[]{request.getUsername()},
-            //         LocaleContextHolder.getLocale());
+            //         LocaleContextHolder.getLocale()); // get Accept-Language
             return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
         }
 
