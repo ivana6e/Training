@@ -1,4 +1,4 @@
-package com.example.project2.model;
+package com.example.project2.pojo;
 
 public enum UserAuthority {
 

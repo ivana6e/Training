@@ -1,7 +1,7 @@
 package com.example.project2.util;
 
-import com.example.project2.model.UserAuthority;
-import com.example.project2.model.UserModel;
+import com.example.project2.pojo.UserAuthority;
+import com.example.project2.pojo.UserPojo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 @Setter
 @Getter
 public class UserDetailsImpl implements UserDetails {
+
     private Long id;
     private String username;
     private String password;
@@ -22,11 +24,11 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(UserModel userModel) {
-        this.id = userModel.getId();
-        this.username = userModel.getUsername();
-        this.password = userModel.getPassword();
-        this.userAuthorities = userModel.getUserAuthorities();
+    public UserDetailsImpl(UserPojo userPojo) {
+        this.id = userPojo.getId();
+        this.username = userPojo.getUsername();
+        this.password = userPojo.getPassword();
+        this.userAuthorities = userPojo.getUserAuthorities();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,4 +1,4 @@
-package com.example.project2.model;
+package com.example.project2.pojo;
 
 import lombok.Getter;
 import lombok.Setter;

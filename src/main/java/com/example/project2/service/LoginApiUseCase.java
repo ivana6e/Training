@@ -1,7 +1,7 @@
 package com.example.project2.service;
 
-import com.example.project2.model.LoginRequest;
-import com.example.project2.model.LoginResponse;
+import com.example.project2.pojo.LoginRequest;
+import com.example.project2.pojo.LoginResponse;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
 
@@ -26,9 +26,7 @@ public class LoginApiUseCase {
         var token = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
         var auth = authenticationManager.authenticate(token);
         var user = (UserDetailsImpl) auth.getPrincipal();
-
         var jwt = jwtUtil.createLoginAccessToken(user);
-
         return LoginResponse.of(jwt, user);
     }
 }

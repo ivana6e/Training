@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.util.Date;
 
 public class JwtUtil {
+
     private final SecretKey secretKey;
     private final int validSeconds;
     private final JwtParser jwtParser;

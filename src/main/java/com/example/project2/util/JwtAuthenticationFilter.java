@@ -1,6 +1,6 @@
 package com.example.project2.util;
 
-import com.example.project2.model.UserAuthority;
+import com.example.project2.pojo.UserAuthority;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -23,8 +23,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     
     private static final String BEARER_PREFIX = "Bearer ";
 
+    private final JwtUtil jwtUtil;
     @Autowired
-    private JwtUtil jwtUtil;
+    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

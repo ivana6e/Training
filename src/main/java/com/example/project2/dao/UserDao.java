@@ -1,12 +1,12 @@
 package com.example.project2.dao;
 
-import com.example.project2.model.UserModel;
+import com.example.project2.pojo.UserPojo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDao extends JpaRepository<UserModel, Long> {
+public interface UserDao extends JpaRepository<UserPojo, Long> {
 
-    UserModel findByUsername(String username);
+    UserPojo findByUsername(String username);
 }

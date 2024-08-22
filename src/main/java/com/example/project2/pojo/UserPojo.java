@@ -1,4 +1,4 @@
-package com.example.project2.model;
+package com.example.project2.pojo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "account")
-public class UserModel {
+public class UserPojo {
 
-    public UserModel() {
+    public UserPojo() {
         username = null;
         password = null;
         userAuthorities = null;

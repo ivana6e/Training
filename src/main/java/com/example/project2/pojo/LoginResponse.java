@@ -1,4 +1,4 @@
-package com.example.project2.model;
+package com.example.project2.pojo;
 
 import com.example.project2.util.UserDetailsImpl;
 
@@ -7,22 +7,19 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class RegisterResponse {
+public class LoginResponse {
 
     private String jwt;
     private Long id;
     private String username;
-    private String password;
     private List<UserAuthority> userAuthorities;
 
-    public static RegisterResponse of(String jwt, UserDetailsImpl user) {
-        var res = new RegisterResponse();
+    public static LoginResponse of(String jwt, UserDetailsImpl user) {
+        var res = new LoginResponse();
         res.jwt = jwt;
         res.id = user.getId();
         res.username = user.getUsername();
-        res.password = user.getPassword();
         res.userAuthorities = user.getUserAuthorities();
-
         return res;
     }
 }

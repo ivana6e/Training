@@ -1,7 +1,7 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-import com.example.project2.model.UserModel;
+import com.example.project2.pojo.UserPojo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class GetApiUseCase {
     }
 
     @GetMapping("/users")
-    public List<UserModel> getUsers() {
+    public List<UserPojo> getUsers() {
         return userDao.findAll();
     }
 }

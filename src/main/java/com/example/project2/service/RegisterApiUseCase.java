@@ -1,14 +1,12 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-import com.example.project2.model.RegisterRequest;
-import com.example.project2.model.RegisterResponse;
-import com.example.project2.model.UserModel;
-import com.example.project2.util.I18nUtil;
+import com.example.project2.pojo.RegisterRequest;
+import com.example.project2.pojo.RegisterResponse;
+import com.example.project2.pojo.UserPojo;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -24,38 +22,35 @@ public class RegisterApiUseCase {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final HttpServletRequest httpServletRequest;
+    private final MessageSource messageSource;
     @Autowired
-    public RegisterApiUseCase(UserDao userDao, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, HttpServletRequest httpServletRequest) {
+    public RegisterApiUseCase(UserDao userDao,
+                              PasswordEncoder passwordEncoder,
+                              JwtUtil jwtUtil,
+                              MessageSource messageSource) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
-        this.httpServletRequest = httpServletRequest;
+        this.messageSource = messageSource;
     }
-
-    @Autowired
-    private MessageSource messageSource;
 
     public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
         // revise
         if(userDao.findByUsername(request.getUsername()) != null) {
-            String msg = I18nUtil.getMessage("username.is.taken", httpServletRequest.getHeader("Accept-Language"));
-            // String msg = I18nUtil.getMessage("username.is.taken", LocaleContextHolder.getLocale());
-            // String msg = messageSource.getMessage(
-            //         "username.is.taken",
-            //         new String[]{request.getUsername()},
-            //         LocaleContextHolder.getLocale()); // get Accept-Language
+            String msg = messageSource.getMessage(
+                    "username.is.taken",
+                    new String[]{request.getUsername()},
+                    LocaleContextHolder.getLocale()); // get Accept-Language
             return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
         }
 
-        UserModel userModel = new UserModel();
+        UserPojo userPojo = new UserPojo();
         var encodedPwd = passwordEncoder.encode(request.getPassword());
-        userModel.setUsername(request.getUsername());
-        userModel.setPassword(encodedPwd);
-        userModel.setUserAuthorities(request.getUserAuthorities());
-        userDao.save(userModel);
-
-        UserDetailsImpl user = new UserDetailsImpl(userModel);
+        userPojo.setUsername(request.getUsername());
+        userPojo.setPassword(encodedPwd);
+        userPojo.setUserAuthorities(request.getUserAuthorities());
+        userDao.save(userPojo);
+        UserDetailsImpl user = new UserDetailsImpl(userPojo);
         var jwt = jwtUtil.createLoginAccessToken(user);
 
         // return ResponseEntity.ok(userModel);

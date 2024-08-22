@@ -1,7 +1,7 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-import com.example.project2.model.UpdateRequest;
+import com.example.project2.pojo.UpdateRequest;
 import com.example.project2.util.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +36,13 @@ public class UpdateApiUseCase {
             return ResponseEntity.notFound().build();
         }
 
-        var userModel = userPO.get();
+        var userPojo = userPO.get();
         var encodedPwd = passwordEncoder.encode(request.getPassword());
         // userModel.setUsername(request.getUsername());
-        userModel.setPassword(encodedPwd);
-        userModel.setUserAuthorities(request.getUserAuthorities());
-        userDao.save(userModel);
+        userPojo.setPassword(encodedPwd);
+        userPojo.setUserAuthorities(request.getUserAuthorities());
+        userDao.save(userPojo);
 
-        return ResponseEntity.ok(userModel);
+        return ResponseEntity.ok(userPojo);
     }
 }

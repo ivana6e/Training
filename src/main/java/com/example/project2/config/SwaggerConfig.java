@@ -31,7 +31,6 @@ public class SwaggerConfig {
                                 .scheme("bearer")
                                 .bearerFormat("JWT")
                 );
-
         return new OpenAPI()
                 .info(info)
                 .addSecurityItem(securityRequirement)
