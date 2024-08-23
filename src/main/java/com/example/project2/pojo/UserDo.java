@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "account")
-public class UserPojo {
+public class UserDo {
 
-    public UserPojo() {
+    public UserDo() {
         username = null;
         password = null;
         userAuthorities = null;

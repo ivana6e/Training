@@ -1,7 +1,7 @@
 package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
-import com.example.project2.pojo.UserPojo;
+import com.example.project2.pojo.UserDo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,12 +29,12 @@ public class GetApiUseCase {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
         }
 
-        var userPO = userDao.findById(id);
-        return userPO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        var userPo = userDao.findById(id);
+        return userPo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/users")
-    public List<UserPojo> getUsers() {
+    public List<UserDo> getUsers() {
         return userDao.findAll();
     }
 }

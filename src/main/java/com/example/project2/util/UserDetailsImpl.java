@@ -1,7 +1,7 @@
 package com.example.project2.util;
 
 import com.example.project2.pojo.UserAuthority;
-import com.example.project2.pojo.UserPojo;
+import com.example.project2.pojo.UserDo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,11 +24,11 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(UserPojo userPojo) {
-        this.id = userPojo.getId();
-        this.username = userPojo.getUsername();
-        this.password = userPojo.getPassword();
-        this.userAuthorities = userPojo.getUserAuthorities();
+    public UserDetailsImpl(UserDo userDo) {
+        this.id = userDo.getId();
+        this.username = userDo.getUsername();
+        this.password = userDo.getPassword();
+        this.userAuthorities = userDo.getUserAuthorities();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -3,7 +3,7 @@ package com.example.project2.service;
 import com.example.project2.dao.UserDao;
 import com.example.project2.pojo.RegisterRequest;
 import com.example.project2.pojo.RegisterResponse;
-import com.example.project2.pojo.UserPojo;
+import com.example.project2.pojo.UserDo;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
 
@@ -44,16 +44,16 @@ public class RegisterApiUseCase {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
         }
 
-        UserPojo userPojo = new UserPojo();
+        UserDo userDo = new UserDo();
         var encodedPwd = passwordEncoder.encode(request.getPassword());
-        userPojo.setUsername(request.getUsername());
-        userPojo.setPassword(encodedPwd);
-        userPojo.setUserAuthorities(request.getUserAuthorities());
-        userDao.save(userPojo);
-        UserDetailsImpl user = new UserDetailsImpl(userPojo);
+        userDo.setUsername(request.getUsername());
+        userDo.setPassword(encodedPwd);
+        userDo.setUserAuthorities(request.getUserAuthorities());
+        userDao.save(userDo);
+        UserDetailsImpl user = new UserDetailsImpl(userDo);
         var jwt = jwtUtil.createLoginAccessToken(user);
 
-        // return ResponseEntity.ok(userModel);
+        // return ResponseEntity.ok(userDo);
         return ResponseEntity.status(HttpStatus.OK).body(RegisterResponse.of(jwt, user));
     }
 }

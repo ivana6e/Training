@@ -1,12 +1,12 @@
 package com.example.project2.dao;
 
-import com.example.project2.pojo.UserDo;
+import com.example.project2.pojo.ClockDo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDao extends JpaRepository<UserDo, Long> {
+public interface ClockDao extends JpaRepository<ClockDo, Long> {
 
-    UserDo findByUsername(String username);
+    ClockDo findByUsername(String username);
 }

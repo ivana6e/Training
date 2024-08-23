@@ -65,7 +65,7 @@ public class UserController {
         return getApiUseCase.getUser(id);
     }
     @GetMapping("/users")
-    public List<UserPojo> getUsers() {
+    public List<UserDo> getUsers() {
         return getApiUseCase.getUsers();
     }
 
