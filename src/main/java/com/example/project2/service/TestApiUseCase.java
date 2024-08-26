@@ -16,13 +16,13 @@ import java.util.Map;
 @Service
 public class TestApiUseCase {
 
-    private static final String BEARER_PREFIX = "Bearer ";
-
     private final JwtUtil jwtUtil;
     @Autowired
     public TestApiUseCase(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
+
+    private static final String BEARER_PREFIX = "Bearer ";
 
     public Map<String, Object> whoAmI(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         var jwt = authorization.substring(BEARER_PREFIX.length());

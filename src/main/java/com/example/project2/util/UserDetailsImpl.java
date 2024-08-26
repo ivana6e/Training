@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;

@@ -20,14 +20,14 @@ import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    
-    private static final String BEARER_PREFIX = "Bearer ";
 
     private final JwtUtil jwtUtil;
     @Autowired
     public JwtAuthenticationFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
+    
+    private static final String BEARER_PREFIX = "Bearer ";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

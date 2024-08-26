@@ -22,9 +22,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-// @PropertySource(value = {"classpath:jwt.properties"})
 @Configuration
 @EnableWebSecurity
+// @PropertySource(value = {"classpath:jwt.properties"})
 public class SecurityConfig {
 
     /*@Bean

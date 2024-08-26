@@ -7,12 +7,15 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 @Data
 @Entity
 @Table(name = "clock_diff")
 public class ClockDiffDo {
+
+    public ClockDiffDo() {
+        id = 0L;
+        username = null;
+    }
 
     @Id
     private Long id;
@@ -22,5 +25,5 @@ public class ClockDiffDo {
     private String username;
 
     @Column(name = "clock_diff")
-    private Timestamp clockDiff;
+    private String clockDiff;
 }
