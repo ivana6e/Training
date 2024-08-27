@@ -7,6 +7,7 @@ import com.example.project2.pojo.UserDo;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -16,7 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
+@Slf4j
 public class RegisterApiUseCase {
 
     private final UserDao userDao;
@@ -52,6 +57,11 @@ public class RegisterApiUseCase {
         userDao.save(userDo);
         UserDetailsImpl user = new UserDetailsImpl(userDo);
         var jwt = jwtUtil.createLoginAccessToken(user);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String time = now.format(formatter);
+        log.info("[{}] - {} registers", time, request.getUsername());
 
         // return ResponseEntity.ok(userDo);
         return ResponseEntity.status(HttpStatus.OK).body(RegisterResponse.of(jwt, user));

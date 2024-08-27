@@ -5,6 +5,7 @@ import com.example.project2.pojo.UpdateRequest;
 import com.example.project2.pojo.UserDo;
 import com.example.project2.util.UserDetailsImpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
+@Slf4j
 public class UpdateApiUseCase {
 
     private final UserDao userDao;
@@ -33,7 +38,14 @@ public class UpdateApiUseCase {
 
         var userDetails = (UserDetailsImpl) principal;
         var userPO = userDao.findById(userDetails.getId());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String time = now.format(formatter);
+
         if(userPO.isEmpty()) {
+            log.info("[{}] - user does not exist", time);
+
             return ResponseEntity.notFound().build();
         }
 
@@ -43,6 +55,8 @@ public class UpdateApiUseCase {
         userDo.setPassword(encodedPwd);
         userDo.setUserAuthorities(request.getUserAuthorities());
         userDao.save(userDo);
+
+        log.info("[{}] - Information of {} is updated", time, request.getUsername());
 
         return ResponseEntity.ok(userDo);
     }

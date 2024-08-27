@@ -3,20 +3,16 @@ package com.example.project2.pojo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "account")
 public class UserDo {
-
-    public UserDo() {
-        username = null;
-        password = null;
-        userAuthorities = null;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -47,13 +47,11 @@ public class ClockDiffSchedule {
 
         log.info("futures: {}", (Object) futures.toArray(new CompletableFuture[0]));
         log.info("join END");
-
     }
 
     @Scheduled(initialDelay = 2000)
     public void fun() throws InterruptedException {
         Thread.sleep(1000);
         log.info("fun");
-        log.info("Thread name: {}", Thread.currentThread().getName());
     }
 }

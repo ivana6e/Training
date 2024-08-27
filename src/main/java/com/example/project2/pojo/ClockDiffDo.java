@@ -6,16 +6,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "clock_diff")
 public class ClockDiffDo {
-
-    public ClockDiffDo() {
-        id = 0L;
-        username = null;
-    }
 
     @Id
     private Long id;
