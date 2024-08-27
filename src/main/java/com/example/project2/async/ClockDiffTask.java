@@ -4,16 +4,17 @@ import com.example.project2.dao.ClockDiffDao;
 import com.example.project2.pojo.ClockDiffDo;
 import com.example.project2.pojo.ClockDo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@Slf4j
 public class ClockDiffTask {
 
     private final ClockDiffDao clockDiffDao;
@@ -22,13 +23,17 @@ public class ClockDiffTask {
         this.clockDiffDao = clockDiffDao;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(ClockDiffTask.class);
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     @Async("asyncTaskExecutor")
-    public CompletableFuture<String> compute(ClockDo clockDo) throws InterruptedException {
-        String sameDateIn = sdf.format(clockDo.getClockIn());
-        String sameDateOut = sdf.format(clockDo.getClockOut());
+    public CompletableFuture<Void> compute(ClockDo clockDo) throws InterruptedException {
+        LocalDateTime inTime = clockDo.getClockIn().toLocalDateTime();
+        String sameDateIn = inTime.format(formatter);
+        LocalDateTime outTime = clockDo.getClockOut().toLocalDateTime();
+        String sameDateOut = outTime.format(formatter);
+
+        log.info("inTime = {}, outTime = {}", inTime, outTime);
+        log.info("sameDateIn = {}, sameDateOut = {}", sameDateIn, sameDateOut);
 
         if(sameDateOut.equals(sameDateIn)) {
             long in = clockDo.getClockIn().getTime();
@@ -44,14 +49,12 @@ public class ClockDiffTask {
             clockDiffDo.setClockDiff(hh + ":" + mm + ":" + ss);
             clockDiffDao.save(clockDiffDo);
 
-            logger.info("hh:mm:ss = {}:{}:{}", hh, mm, ss);
+            log.info("hh:mm:ss = {}:{}:{}", hh, mm, ss);
         }
         else {
-            logger.info("not at the same day");
+            log.info("not at the same day");
         }
 
-        logger.info("Thread name: {}", Thread.currentThread().getName());
-
-        return CompletableFuture.completedFuture("computeTask");
+        return null;
     }
 }
