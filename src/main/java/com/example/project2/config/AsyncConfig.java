@@ -26,7 +26,7 @@ public class AsyncConfig {
         asyncTaskExecutor.setCorePoolSize(corePoolSize);
         asyncTaskExecutor.setMaxPoolSize(maxPoolSize);
         asyncTaskExecutor.setQueueCapacity(queueCapacity);
-        asyncTaskExecutor.setThreadNamePrefix("(=ↀᆺↀ=)-");
+        asyncTaskExecutor.setThreadNamePrefix("(=O.O=)-");
         asyncTaskExecutor.initialize();
         return asyncTaskExecutor;
     }

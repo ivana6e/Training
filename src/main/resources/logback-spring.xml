@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration>
+
+    <!-- default Logback by spring boot -->
+    <!-- <include resource="org/springframework/boot/logging/logback/base.xml" /> -->
+
+    <!-- console -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5level [%20thread] %-37logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- file -->
+    <appender name="infoFile" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>infoFile.log</file>
+        <!-- clear history, default is true(not clean) -->
+        <append>false</append>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5level [%20thread] %-37logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- file -->
+    <appender name="errorFile" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>errorFile.log</file>
+        <!-- clear history, default is true(not clean) -->
+        <append>false</append>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5level [%20thread] %-37logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- AsyncAppender: increase writing performance -->
+    <appender name="infoAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- queueSize affects writing performance -->
+        <queueSize>512</queueSize>
+        <appender-ref ref="infoFile" />
+    </appender>
+
+    <!-- AsyncAppender: increase writing performance -->
+    <appender name="errorAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- queueSize affects writing performance -->
+        <queueSize>512</queueSize>
+        <appender-ref ref="errorFile" />
+    </appender>
+
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="console" />
+        <appender-ref ref="infoAsync" />
+        <appender-ref ref="errorAsync" />
+    </root>
+
+    <!-- class log -->
+    <logger name="com.example.project2" level="DEBUG" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="infoAsync" />
+        <appender-ref ref="errorAsync" />
+    </logger>
+
+</configuration>

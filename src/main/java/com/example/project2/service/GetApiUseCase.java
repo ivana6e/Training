@@ -2,8 +2,8 @@ package com.example.project2.service;
 
 import com.example.project2.dao.UserDao;
 import com.example.project2.pojo.UserDo;
-
 import com.example.project2.util.UserDetailsImpl;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

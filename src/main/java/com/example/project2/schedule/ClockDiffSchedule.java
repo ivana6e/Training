@@ -41,17 +41,17 @@ public class ClockDiffSchedule {
             }));
         }
 
-        log.info("for-loop END");
+        log.debug("for-loop END");
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-        log.info("futures: {}", (Object) futures.toArray(new CompletableFuture[0]));
-        log.info("join END");
+        log.debug("futures: {}", (Object) futures.toArray(new CompletableFuture[0]));
+        log.debug("join END");
     }
 
     @Scheduled(initialDelay = 2000)
     public void fun() throws InterruptedException {
         Thread.sleep(1000);
-        log.info("fun");
+        log.debug("fun");
     }
 }

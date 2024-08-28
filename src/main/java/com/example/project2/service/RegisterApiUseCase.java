@@ -61,7 +61,7 @@ public class RegisterApiUseCase {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - {} registers", time, request.getUsername());
+        log.info("[{}] - {} is registered", time, request.getUsername());
 
         // return ResponseEntity.ok(userDo);
         return ResponseEntity.status(HttpStatus.OK).body(RegisterResponse.of(jwt, user));

@@ -17,8 +17,8 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         Info info = new Info()
                 .title("Project2 Spring Boot API Document")
-                .version("(=\uD83D\uDF66 ﻌ \uD83D\uDF66=)")
-                .description(":･ﾟ✧(=✪ ᆺ ✪=):･ﾟ✧");
+                .version("(=✪ᆺ✪=)/\\(=\uD83D\uDF66 ﻌ \uD83D\uDF66=)")
+                .description(":･ﾟ✧(=ↀᆺↀ=):･ﾟ✧");
 
         String securitySchemeName = "JWT Authentication";
         SecurityRequirement securityRequirement =

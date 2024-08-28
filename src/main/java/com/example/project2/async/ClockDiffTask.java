@@ -32,8 +32,8 @@ public class ClockDiffTask {
         LocalDateTime outTime = clockDo.getClockOut().toLocalDateTime();
         String sameDateOut = outTime.format(formatter);
 
-        log.info("inTime = {}, outTime = {}", inTime, outTime);
-        log.info("sameDateIn = {}, sameDateOut = {}", sameDateIn, sameDateOut);
+        log.debug("inTime = {}, outTime = {}", inTime, outTime);
+        log.debug("sameDateIn = {}, sameDateOut = {}", sameDateIn, sameDateOut);
 
         if(sameDateOut.equals(sameDateIn)) {
             long in = clockDo.getClockIn().getTime();
@@ -49,10 +49,10 @@ public class ClockDiffTask {
             clockDiffDo.setClockDiff(hh + ":" + mm + ":" + ss);
             clockDiffDao.save(clockDiffDo);
 
-            log.info("hh:mm:ss = {}:{}:{}", hh, mm, ss);
+            log.debug("hh:mm:ss = {}:{}:{}", hh, mm, ss);
         }
         else {
-            log.info("not at the same day");
+            log.debug("not at the same day");
         }
 
         return null;
