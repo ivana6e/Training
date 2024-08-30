@@ -36,7 +36,7 @@ public class LoginApiUseCase {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - {} logins in", time, request.getUsername());
+        log.info("[{}] - {} login successful", time, request.getUsername());
 
         return LoginResponse.of(jwt, user);
     }

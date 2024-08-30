@@ -7,8 +7,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 
@@ -26,10 +24,11 @@ public class ClockDo {
     private String username;
 
     @Column(name = "clock_in")
-    @CreationTimestamp
     private Timestamp clockIn;
 
     @Column(name = "clock_out")
-    @UpdateTimestamp
     private Timestamp clockOut;
+
+    @Column(name = "message")
+    private String message;
 }

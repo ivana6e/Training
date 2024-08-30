@@ -51,9 +51,9 @@ public class UpdateApiUseCase {
 
         UserDo userDo = userPO.get();
         var encodedPwd = passwordEncoder.encode(request.getPassword());
-        // userDo.setUsername(request.getUsername());
+        userDo.setUsername(request.getUsername());
         userDo.setPassword(encodedPwd);
-        userDo.setUserAuthorities(request.getUserAuthorities());
+        // userDo.setUserAuthorities(request.getUserAuthorities());
         userDao.save(userDo);
 
         log.info("[{}] - Information of {} is updated", time, request.getUsername());

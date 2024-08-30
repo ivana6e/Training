@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Service
 @Slf4j
@@ -46,6 +47,7 @@ public class RegisterApiUseCase {
                     "username.is.taken",
                     new String[]{request.getUsername()},
                     LocaleContextHolder.getLocale()); // get Accept-Language
+            // log.debug("where are you? {}", Locale.getDefault());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
         }
 

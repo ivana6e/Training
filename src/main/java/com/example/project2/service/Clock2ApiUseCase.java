@@ -17,15 +17,15 @@ import java.time.format.DateTimeFormatter;
 
 @Service
 @Slf4j
-public class ClockApiUseCase {
+public class Clock2ApiUseCase {
 
     private final ClockDao clockDao;
     @Autowired
-    public ClockApiUseCase(ClockDao clockDao) {
+    public Clock2ApiUseCase(ClockDao clockDao) {
         this.clockDao = clockDao;
     }
 
-    public ResponseEntity<?> clock() {
+    public ResponseEntity<?> clock2() throws Exception{
         var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if("anonymousUser".equals(principal)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
@@ -43,24 +43,28 @@ public class ClockApiUseCase {
             clockDo.setId(userDetails.getId());
             clockDo.setUsername(userDetails.getUsername());
             clockDo.setClockIn(Timestamp.valueOf(LocalDateTime.now()));
+            clockDo.setMessage("failed to clock in");
             clockDao.save(clockDo);
 
-            log.info("[{}] - {} clocked in successfully", time, userDetails.getUsername());
+            log.info("[{}] - {} failed to clock in", time, userDetails.getUsername());
 
-            return ResponseEntity.ok(clockDo);
+            throw new Exception("clock in");
         }
 
         ClockDo clockDo = clockPo.get();
         if(clockDo.getClockOut() == null) {
             clockDo.setClockOut(Timestamp.valueOf(LocalDateTime.now()));
+            clockDo.setMessage("failed to clock out");
             clockDao.save(clockDo);
 
-            log.info("[{}] - {} clocked out successfully", time, userDetails.getUsername());
+            log.info("[{}] - {} failed to clocked out", time, userDetails.getUsername());
+
+            throw new Exception("clock out");
         }
         else {
             log.info("[{}] - {} already clocked out", time, userDetails.getUsername());
-        }
 
-        return ResponseEntity.ok(clockDo);
+            return ResponseEntity.ok(clockDo);
+        }
     }
 }
