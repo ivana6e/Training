@@ -7,9 +7,21 @@
     <!-- <include resource="org/springframework/boot/logging/logback/base.xml" /> -->
 
     <!-- console -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="debugConsole" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5level [%20thread] %-37logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- console -->
+    <appender name="traceConsole" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>TRACE</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
@@ -66,14 +78,16 @@
 
     <root>
         <level value="INFO" />
-        <appender-ref ref="console" />
+        <appender-ref ref="debugConsole" />
+        <appender-ref ref="traceConsole" />
         <appender-ref ref="infoAsync" />
         <appender-ref ref="errorAsync" />
     </root>
 
     <!-- class log -->
-    <logger name="com.example.project2" level="DEBUG" additivity="false">
-        <appender-ref ref="console" />
+    <logger name="com.example.project2" level="TRACE" additivity="false">
+        <appender-ref ref="debugConsole" />
+        <appender-ref ref="traceConsole" />
         <appender-ref ref="infoAsync" />
         <appender-ref ref="errorAsync" />
     </logger>

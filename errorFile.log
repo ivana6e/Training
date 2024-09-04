@@ -1,6 +1,6 @@
-2024-09-04 16:55:37 ERROR [http-nio-8080-exec-3] GlobalExceptionHandler               : clock in
+2024-09-04 17:55:35 ERROR [http-nio-8080-exec-3] GlobalExceptionHandler               : clock in
 java.lang.Exception: clock in
-	at com.example.project2.service.ClockErrApiUseCase.clockErr(ClockErrApiUseCase.java:67)
+	at com.example.project2.service.ClockErrApiUseCase.clockErr(ClockErrApiUseCase.java:68)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
