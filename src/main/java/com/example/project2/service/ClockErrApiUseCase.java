@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -26,6 +28,7 @@ public class ClockErrApiUseCase {
         this.clockDao = clockDao;
     }
 
+    @Transactional // (rollbackFor = Exception.class)
     public ResponseEntity<?> clockErr() throws Exception {
         var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if("anonymousUser".equals(principal)) {
@@ -60,7 +63,10 @@ public class ClockErrApiUseCase {
             log.info("[{}] - {} failed to clock in", datetime, userDetails.getUsername());
             log.debug("failed to clocked in");
 
-            throw new Exception("clock in");
+            // manually
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw new Exception("clock in"); // does not work without rollback
+            // throw new RuntimeException("clock in");
         }
 
         return ResponseEntity.noContent().build();

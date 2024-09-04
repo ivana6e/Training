@@ -27,8 +27,8 @@ public class ClockDiffSchedule {
         this.testTask = testTask;
     }
 
-    // @Scheduled(cron="0 20 16 * * ?")
-    @Scheduled(initialDelay = 20000)
+    @Scheduled(cron="0 20 15 * * ?")
+    // @Scheduled(initialDelay = 2000)
     public void compute() throws InterruptedException {
         var clocks = clockDao.findAll();
 
