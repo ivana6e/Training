@@ -44,8 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Claims claims;
         try {
             claims = jwtUtil.parseToken(jwt);
-        }
-        catch(JwtException e) {
+        } catch(JwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
@@ -55,17 +54,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         userDetails.setId(Long.valueOf(claims.getSubject()));
         userDetails.setUsername(claims.get("username", String.class));
 
-        var userAuthorities = ((List<String>) claims.get("authorities"))
+        /* var userAuthorities = ((List<String>) claims.get("authorities"))
                 .stream()
                 .map(UserAuthority::valueOf)
                 .toList();
         userDetails.setUserAuthorities(userAuthorities);
 
+         */
+
         // put into Security Context
         var token = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
-                userDetails.getAuthorities()
+                null // userDetails.getAuthorities()
         );
         SecurityContextHolder.getContext().setAuthentication(token);
 

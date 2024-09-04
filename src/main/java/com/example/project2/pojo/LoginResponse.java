@@ -12,14 +12,16 @@ public class LoginResponse {
     private String jwt;
     private Long id;
     private String username;
-    private List<UserAuthority> userAuthorities;
+    private String name;
+    // private List<UserAuthority> userAuthorities;
 
     public static LoginResponse of(String jwt, UserDetailsImpl user) {
         var res = new LoginResponse();
         res.jwt = jwt;
         res.id = user.getId();
         res.username = user.getUsername();
-        res.userAuthorities = user.getUserAuthorities();
+        res.name = user.getName();
+        // res.userAuthorities = user.getUserAuthorities();
         return res;
     }
 }

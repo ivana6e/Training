@@ -45,7 +45,6 @@ public class UpdateApiUseCase {
 
         if(userPO.isEmpty()) {
             log.info("[{}] - user does not exist", time);
-
             return ResponseEntity.notFound().build();
         }
 
@@ -53,11 +52,11 @@ public class UpdateApiUseCase {
         var encodedPwd = passwordEncoder.encode(request.getPassword());
         userDo.setUsername(request.getUsername());
         userDo.setPassword(encodedPwd);
+        userDo.setName(request.getName());
         // userDo.setUserAuthorities(request.getUserAuthorities());
         userDao.save(userDo);
 
         log.info("[{}] - Information of {} is updated", time, request.getUsername());
-
         return ResponseEntity.ok(userDo);
     }
 }

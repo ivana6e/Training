@@ -28,8 +28,7 @@ public class TestApiUseCase {
         var jwt = authorization.substring(BEARER_PREFIX.length());
         try {
             return jwtUtil.parseToken(jwt);
-        }
-        catch(JwtException e) {
+        } catch(JwtException e) {
             throw new BadCredentialsException(e.getMessage(), e);
         }
     }
@@ -41,10 +40,9 @@ public class TestApiUseCase {
         }
 
         var userDetails = (UserDetailsImpl) principal;
-        return String.format("Hi, your\nid: %s\nusername: %s\nauthority：%s",
+        return String.format("Hi, id: %d\nusername: %s",
                 userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getAuthorities()
+                userDetails.getUsername()
         );
     }
 }

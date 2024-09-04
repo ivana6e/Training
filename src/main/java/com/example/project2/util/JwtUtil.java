@@ -33,7 +33,7 @@ public class JwtUtil {
                 .issuedAt(new Date())
                 .expiration(new Date(expirationMillis))
                 .add("username", user.getUsername())
-                .add("authorities", user.getUserAuthorities())
+                // .add("authorities", user.getUserAuthorities())
                 .build();
 
         return Jwts.builder()

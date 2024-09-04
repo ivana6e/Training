@@ -11,5 +11,6 @@ public class RegisterRequest {
 
     private String username;
     private String password;
-    private List<UserAuthority> userAuthorities;
+    private String name;
+    // private List<UserAuthority> userAuthorities;
 }

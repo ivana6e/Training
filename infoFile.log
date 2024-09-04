@@ -1,31 +1,26 @@
-2024-08-30 12:29:06  INFO [                main] Project2Application                  : Starting Project2Application using Java 17.0.12 with PID 4516 (C:\Users\ivana.lee\Desktop\project2\target\classes started by ivana.lee in C:\Users\ivana.lee\Desktop\project2)
-2024-08-30 12:29:06  INFO [                main] Project2Application                  : No active profile set, falling back to 1 default profile: "default"
-2024-08-30 12:29:06  INFO [                main] RepositoryConfigurationDelegate      : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-08-30 12:29:06  INFO [                main] RepositoryConfigurationDelegate      : Finished Spring Data repository scanning in 39 ms. Found 3 JPA repository interfaces.
-2024-08-30 12:29:07  INFO [                main] TomcatWebServer                      : Tomcat initialized with port 8080 (http)
-2024-08-30 12:29:07  INFO [                main] Http11NioProtocol                    : Initializing ProtocolHandler ["http-nio-8080"]
-2024-08-30 12:29:07  INFO [                main] StandardService                      : Starting service [Tomcat]
-2024-08-30 12:29:07  INFO [                main] StandardEngine                       : Starting Servlet engine: [Apache Tomcat/10.1.26]
-2024-08-30 12:29:07  INFO [                main] [/]                                  : Initializing Spring embedded WebApplicationContext
-2024-08-30 12:29:07  INFO [                main] ServletWebServerApplicationContext   : Root WebApplicationContext: initialization completed in 1607 ms
-2024-08-30 12:29:08  INFO [                main] LogHelper                            : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-08-30 12:29:08  INFO [                main] Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
-2024-08-30 12:29:08  INFO [                main] RegionFactoryInitiator               : HHH000026: Second-level cache disabled
-2024-08-30 12:29:08  INFO [                main] SpringPersistenceUnitInfo            : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-08-30 12:29:08  INFO [                main] HikariDataSource                     : HikariPool-1 - Starting...
-2024-08-30 12:29:08  INFO [                main] HikariPool                           : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ab9c735
-2024-08-30 12:29:08  INFO [                main] HikariDataSource                     : HikariPool-1 - Start completed.
-2024-08-30 12:29:09  INFO [                main] JtaPlatformInitiator                 : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-08-30 12:29:09  INFO [                main] LocalContainerEntityManagerFactoryBean: Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-08-30 12:29:10  INFO [                main] InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer: Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
-2024-08-30 12:29:10  INFO [                main] Http11NioProtocol                    : Starting ProtocolHandler ["http-nio-8080"]
-2024-08-30 12:29:11  INFO [                main] TomcatWebServer                      : Tomcat started on port 8080 (http) with context path '/'
-2024-08-30 12:29:11  INFO [                main] Project2Application                  : Started Project2Application in 5.355 seconds (process running for 5.692)
-2024-08-30 12:29:16  INFO [http-nio-8080-exec-2] [/]                                  : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-08-30 12:29:16  INFO [http-nio-8080-exec-2] DispatcherServlet                    : Initializing Servlet 'dispatcherServlet'
-2024-08-30 12:29:16  INFO [http-nio-8080-exec-2] DispatcherServlet                    : Completed initialization in 0 ms
-2024-08-30 12:29:16  INFO [http-nio-8080-exec-2] LoginApiUseCase                      : [2024/08/30 12:29:16] - dft3 login successful
-2024-08-30 12:29:28  INFO [http-nio-8080-exec-3] Clock2ApiUseCase                     : [2024/08/30 12:29:28] - dft3 failed to clock in
-2024-08-30 12:30:15  INFO [SpringApplicationShutdownHook] LocalContainerEntityManagerFactoryBean: Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-08-30 12:30:15  INFO [SpringApplicationShutdownHook] HikariDataSource                     : HikariPool-1 - Shutdown initiated...
-2024-08-30 12:30:15  INFO [SpringApplicationShutdownHook] HikariDataSource                     : HikariPool-1 - Shutdown completed.
+2024-09-04 15:38:57  INFO [                main] Project2Application                  : Starting Project2Application using Java 17.0.12 with PID 19548 (C:\Users\ivana.lee\Desktop\project2\target\classes started by ivana.lee in C:\Users\ivana.lee\Desktop\project2)
+2024-09-04 15:38:57  INFO [                main] Project2Application                  : No active profile set, falling back to 1 default profile: "default"
+2024-09-04 15:38:58  INFO [                main] RepositoryConfigurationDelegate      : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-04 15:38:58  INFO [                main] RepositoryConfigurationDelegate      : Finished Spring Data repository scanning in 42 ms. Found 3 JPA repository interfaces.
+2024-09-04 15:38:59  INFO [                main] TomcatWebServer                      : Tomcat initialized with port 8080 (http)
+2024-09-04 15:38:59  INFO [                main] Http11NioProtocol                    : Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-04 15:38:59  INFO [                main] StandardService                      : Starting service [Tomcat]
+2024-09-04 15:38:59  INFO [                main] StandardEngine                       : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-09-04 15:38:59  INFO [                main] [/]                                  : Initializing Spring embedded WebApplicationContext
+2024-09-04 15:38:59  INFO [                main] ServletWebServerApplicationContext   : Root WebApplicationContext: initialization completed in 1484 ms
+2024-09-04 15:38:59  INFO [                main] LogHelper                            : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-04 15:38:59  INFO [                main] Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-04 15:38:59  INFO [                main] RegionFactoryInitiator               : HHH000026: Second-level cache disabled
+2024-09-04 15:38:59  INFO [                main] SpringPersistenceUnitInfo            : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-04 15:39:00  INFO [                main] HikariDataSource                     : HikariPool-1 - Starting...
+2024-09-04 15:39:00  INFO [                main] HikariPool                           : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3a1a0bc
+2024-09-04 15:39:00  INFO [                main] HikariDataSource                     : HikariPool-1 - Start completed.
+2024-09-04 15:39:00  INFO [                main] JtaPlatformInitiator                 : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-04 15:39:00  INFO [                main] LocalContainerEntityManagerFactoryBean: Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04 15:39:01  INFO [                main] InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer: Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2024-09-04 15:39:02  INFO [                main] Http11NioProtocol                    : Starting ProtocolHandler ["http-nio-8080"]
+2024-09-04 15:39:02  INFO [                main] TomcatWebServer                      : Tomcat started on port 8080 (http) with context path '/'
+2024-09-04 15:39:02  INFO [                main] Project2Application                  : Started Project2Application in 4.946 seconds (process running for 5.278)
+2024-09-04 15:39:27  INFO [SpringApplicationShutdownHook] LocalContainerEntityManagerFactoryBean: Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04 15:39:27  INFO [SpringApplicationShutdownHook] HikariDataSource                     : HikariPool-1 - Shutdown initiated...
+2024-09-04 15:39:27  INFO [SpringApplicationShutdownHook] HikariDataSource                     : HikariPool-1 - Shutdown completed.

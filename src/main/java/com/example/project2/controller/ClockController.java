@@ -1,14 +1,13 @@
 package com.example.project2.controller;
 
-import com.example.project2.pojo.ClockDo;
-import com.example.project2.service.Clock2ApiUseCase;
-import com.example.project2.service.ClockApiUseCase;
+import com.example.project2.service.ClockErrApiUseCase;
+import com.example.project2.service.ClockInApiUseCase;
+import com.example.project2.service.ClockOutApiUseCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,21 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClockController {
 
-    private final ClockApiUseCase clockApiUseCase;
-    private final Clock2ApiUseCase clock2ApiUseCase;
+    private final ClockInApiUseCase clockInApiUseCase;
+    private final ClockOutApiUseCase clockOutApiUseCase;
+    private final ClockErrApiUseCase clockErrApiUseCase;
     @Autowired
-    public ClockController(ClockApiUseCase clockApiUseCase, Clock2ApiUseCase clock2ApiUseCase) {
-        this.clockApiUseCase = clockApiUseCase;
-        this.clock2ApiUseCase = clock2ApiUseCase;
+    public ClockController(ClockInApiUseCase clockInApiUseCase,
+                           ClockOutApiUseCase clockOutApiUseCase,
+                           ClockErrApiUseCase clockErrApiUseCase) {
+        this.clockInApiUseCase = clockInApiUseCase;
+        this.clockOutApiUseCase = clockOutApiUseCase;
+        this.clockErrApiUseCase = clockErrApiUseCase;
     }
 
-    @PostMapping("/clock")
-    public ResponseEntity<?> clock() {
-        return clockApiUseCase.clock();
+    @PostMapping("/clock-in")
+    public ResponseEntity<?> clockIn() {
+        return clockInApiUseCase.clockIn();
     }
 
-    @PostMapping("/clock2")
-    public ResponseEntity<?> clock2() throws Exception {
-        return clock2ApiUseCase.clock2();
-    }
+    @PostMapping("/clock-out")
+    public ResponseEntity<?> clockOut() { return clockOutApiUseCase.clockOut(); }
+
+    @PostMapping("/clock-err")
+    public ResponseEntity<?> clockErr() throws Exception { return clockErrApiUseCase.clockErr(); }
 }

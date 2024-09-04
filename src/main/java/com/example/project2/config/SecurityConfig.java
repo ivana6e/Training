@@ -27,7 +27,7 @@ import java.util.Arrays;
 // @PropertySource(value = {"classpath:jwt.properties"})
 public class SecurityConfig {
 
-    /*@Bean
+    /* @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(requests -> requests
@@ -40,15 +40,19 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
-    }*/
+    }
 
-    /*@Bean
+     */
+
+    /* @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests.anyRequest().permitAll())
                 .build();
-    }*/
+    }
+
+     */
 
     @Bean
     public SecurityFilterChain securityFilterChain(

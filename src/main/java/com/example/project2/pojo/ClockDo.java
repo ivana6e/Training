@@ -1,10 +1,6 @@
 package com.example.project2.pojo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,15 +9,17 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @NoArgsConstructor
+@IdClass(ClockUPK.class)
 @Table(name = "clock")
 public class ClockDo {
 
     @Id
+    @Column(name = "id")
     private Long id;
 
-    @NotBlank
-    @Column(name = "username")
-    private String username;
+    @Id
+    @Column(name = "date")
+    private String date;
 
     @Column(name = "clock_in")
     private Timestamp clockIn;

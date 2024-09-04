@@ -16,6 +16,7 @@ public class UserDo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotBlank
@@ -27,6 +28,10 @@ public class UserDo {
     private String password;
 
     @NotBlank
-    @Column(name = "authorities", nullable = false)
-    private List<UserAuthority> userAuthorities = new ArrayList<>();
+    @Column(name = "name", length = 30)
+    private String name;
+
+    // @NotBlank
+    // @Column(name = "authorities", nullable = false)
+    // private List<UserAuthority> userAuthorities = new ArrayList<>();
 }

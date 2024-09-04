@@ -11,5 +11,6 @@ public class UpdateRequest {
 
     private String username;
     private String password;
+    private String name;
     // private List<UserAuthority> userAuthorities;
 }

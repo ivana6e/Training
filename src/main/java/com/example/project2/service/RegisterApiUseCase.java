@@ -55,7 +55,8 @@ public class RegisterApiUseCase {
         var encodedPwd = passwordEncoder.encode(request.getPassword());
         userDo.setUsername(request.getUsername());
         userDo.setPassword(encodedPwd);
-        userDo.setUserAuthorities(request.getUserAuthorities());
+        userDo.setName(request.getName());
+        // userDo.setUserAuthorities(request.getUserAuthorities());
         userDao.save(userDo);
         UserDetailsImpl user = new UserDetailsImpl(userDo);
         var jwt = jwtUtil.createLoginAccessToken(user);

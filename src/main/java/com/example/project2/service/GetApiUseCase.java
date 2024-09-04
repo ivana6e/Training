@@ -28,7 +28,7 @@ public class GetApiUseCase {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<?> getUser(@PathVariable long id) {
+    public ResponseEntity<?> getUser(@PathVariable Long id) {
         var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if("anonymousUser".equals(principal)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");

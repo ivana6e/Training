@@ -15,6 +15,5 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.ofNullable(ErrorResponse.builder(e, HttpStatus.NOT_ACCEPTABLE, "clock").build());
-
     }
 }

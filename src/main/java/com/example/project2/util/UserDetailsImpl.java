@@ -19,7 +19,8 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private List<UserAuthority> userAuthorities;
+    private String name;
+    // private List<UserAuthority> userAuthorities;
 
     public UserDetailsImpl() {
     }
@@ -28,14 +29,18 @@ public class UserDetailsImpl implements UserDetails {
         this.id = userDo.getId();
         this.username = userDo.getUsername();
         this.password = userDo.getPassword();
-        this.userAuthorities = userDo.getUserAuthorities();
+        this.name = userDo.getName();
+        // this.userAuthorities = userDo.getUserAuthorities();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.userAuthorities
+        /* return this.userAuthorities
                 .stream()
                 .map(Enum::name)
                 .map(SimpleGrantedAuthority::new)
                 .toList();
+
+         */
+        return null;
     }
 }
