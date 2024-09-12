@@ -1,6 +1,6 @@
 package com.example.project2.dao;
 
-import com.example.project2.pojo.LoginActivity;
+import com.example.project2.pojo.LoginInfoDo;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,18 +11,18 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Repository
-public class TestDao {
+public class LoginInfoJpaRepository {
 
-    private final List<LoginActivity> activities = new ArrayList<>();
+    private final List<LoginInfoDo> activities = new ArrayList<>();
 
     public void insert(String name) {
-        var activity = LoginActivity.of(name, LocalDateTime.now());
+        var activity = LoginInfoDo.of(name, LocalDateTime.now());
         activities.add(activity);
     }
 
-    public List<LoginActivity> findByNotNotified() {
+    public List<LoginInfoDo> findByNotNotified() {
         return activities.stream()
-                .filter(Predicate.not(LoginActivity::isNotified))
+                .filter(Predicate.not(LoginInfoDo::isNotified))
                 .collect(Collectors.toList());
     }
 }

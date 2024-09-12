@@ -1,4 +1,4 @@
-package com.example.project2.pojo;
+package com.example.project2.pojo.user;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class LoginRequest {
 
-    private String username;
+    private String account;
     private String password;
 }

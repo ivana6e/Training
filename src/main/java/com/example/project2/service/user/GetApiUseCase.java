@@ -1,7 +1,7 @@
-package com.example.project2.service;
+package com.example.project2.service.user;
 
-import com.example.project2.dao.UserDao;
-import com.example.project2.pojo.UserDo;
+import com.example.project2.dao.UserJpaRepository;
+import com.example.project2.pojo.user.UserDo;
 import com.example.project2.util.UserDetailsImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +21,10 @@ import java.util.List;
 @Slf4j
 public class GetApiUseCase {
 
-    private final UserDao userDao;
+    private final UserJpaRepository userJpaRepository;
     @Autowired
-    public GetApiUseCase(UserDao userDao) {
-        this.userDao = userDao;
+    public GetApiUseCase(UserJpaRepository userJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
     }
 
     @GetMapping("/users/{id}")
@@ -34,13 +34,13 @@ public class GetApiUseCase {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
         }
 
-        var userPo = userDao.findById(id);
+        var userPo = userJpaRepository.findById(id);
 
         var userDetails = (UserDetailsImpl) principal;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - {} queries user: {}", time, userDetails.getUsername(), userPo.get().getUsername());
+        log.info("[query time {}] - {} queries account {}", time, userDetails.getAccount(), userPo.get().getAccount());
 
         return userPo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -50,8 +50,8 @@ public class GetApiUseCase {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - Query all users", time);
+        log.info("[query time {}] - Query all users", time);
 
-        return userDao.findAll();
+        return userJpaRepository.findAll();
     }
 }

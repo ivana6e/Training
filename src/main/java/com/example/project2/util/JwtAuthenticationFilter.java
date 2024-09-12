@@ -1,7 +1,5 @@
 package com.example.project2.util;
 
-import com.example.project2.pojo.UserAuthority;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -52,21 +49,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // build UserDetails object
         var userDetails = new UserDetailsImpl();
         userDetails.setId(Long.valueOf(claims.getSubject()));
-        userDetails.setUsername(claims.get("username", String.class));
-
-        /* var userAuthorities = ((List<String>) claims.get("authorities"))
-                .stream()
-                .map(UserAuthority::valueOf)
-                .toList();
-        userDetails.setUserAuthorities(userAuthorities);
-
-         */
+        userDetails.setAccount(claims.get("account", String.class));
 
         // put into Security Context
         var token = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
-                null // userDetails.getAuthorities()
+                null
         );
         SecurityContextHolder.getContext().setAuthentication(token);
 

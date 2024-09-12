@@ -18,18 +18,6 @@
         </encoder>
     </appender>
 
-    <!-- console -->
-    <appender name="traceConsole" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>TRACE</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %5level [%20thread] %-37logger{0}: %msg%n</pattern>
-        </encoder>
-    </appender>
-
     <!-- file -->
     <appender name="infoFile" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -79,15 +67,13 @@
     <root>
         <level value="INFO" />
         <appender-ref ref="debugConsole" />
-        <appender-ref ref="traceConsole" />
         <appender-ref ref="infoAsync" />
         <appender-ref ref="errorAsync" />
     </root>
 
     <!-- class log -->
-    <logger name="com.example.project2" level="TRACE" additivity="false">
+    <logger name="com.example.project2" level="DEBUG" additivity="false">
         <appender-ref ref="debugConsole" />
-        <appender-ref ref="traceConsole" />
         <appender-ref ref="infoAsync" />
         <appender-ref ref="errorAsync" />
     </logger>

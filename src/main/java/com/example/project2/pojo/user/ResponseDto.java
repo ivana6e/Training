@@ -1,4 +1,4 @@
-package com.example.project2.pojo;
+package com.example.project2.pojo.user;
 
 import lombok.Builder;
 import lombok.Data;

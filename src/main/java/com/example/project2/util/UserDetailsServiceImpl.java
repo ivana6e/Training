@@ -1,7 +1,7 @@
 package com.example.project2.util;
 
-import com.example.project2.dao.UserDao;
-import com.example.project2.pojo.UserDo;
+import com.example.project2.dao.UserJpaRepository;
+import com.example.project2.pojo.user.UserDo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,17 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserDao userDao;
+    private final UserJpaRepository userJpaRepository;
     @Autowired
-    public UserDetailsServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserDetailsServiceImpl(UserJpaRepository userJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDo userDo = userDao.findByUsername(username);
+    public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+        UserDo userDo = userJpaRepository.findByAccount(account);
         if(userDo == null) {
-            throw new UsernameNotFoundException("Can't find user: " + username);
+            throw new UsernameNotFoundException("Can't find user: " + account);
         }
 
         /*List<SimpleGrantedAuthority> authorities = userDo.getUserAuthorities()
@@ -34,7 +34,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .withUsername(username)
                 .password(userDo.getPassword())
                 .authorities(authorities)
-                .build();*/
+                .build();
+        */
 
         return new UserDetailsImpl(userDo);
     }

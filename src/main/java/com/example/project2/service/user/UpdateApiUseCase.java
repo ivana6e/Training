@@ -1,8 +1,8 @@
-package com.example.project2.service;
+package com.example.project2.service.user;
 
-import com.example.project2.dao.UserDao;
-import com.example.project2.pojo.UpdateRequest;
-import com.example.project2.pojo.UserDo;
+import com.example.project2.dao.UserJpaRepository;
+import com.example.project2.pojo.user.UpdateRequest;
+import com.example.project2.pojo.user.UserDo;
 import com.example.project2.util.UserDetailsImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +22,11 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class UpdateApiUseCase {
 
-    private final UserDao userDao;
+    private final UserJpaRepository userJpaRepository;
     private final PasswordEncoder passwordEncoder;
     @Autowired
-    public UpdateApiUseCase(UserDao userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
+    public UpdateApiUseCase(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder) {
+        this.userJpaRepository = userJpaRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -37,26 +37,26 @@ public class UpdateApiUseCase {
         }
 
         var userDetails = (UserDetailsImpl) principal;
-        var userPO = userDao.findById(userDetails.getId());
+        var userPO = userJpaRepository.findById(userDetails.getId());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
 
         if(userPO.isEmpty()) {
-            log.info("[{}] - user does not exist", time);
+            log.info("[update time {}] - user does not exist", time);
             return ResponseEntity.notFound().build();
         }
 
         UserDo userDo = userPO.get();
         var encodedPwd = passwordEncoder.encode(request.getPassword());
-        userDo.setUsername(request.getUsername());
+        userDo.setAccount(request.getAccount());
         userDo.setPassword(encodedPwd);
         userDo.setName(request.getName());
         // userDo.setUserAuthorities(request.getUserAuthorities());
-        userDao.save(userDo);
+        userJpaRepository.save(userDo);
 
-        log.info("[{}] - Information of {} is updated", time, request.getUsername());
+        log.info("[update time {}] - Information of {} is updated", time, request.getAccount());
         return ResponseEntity.ok(userDo);
     }
 }

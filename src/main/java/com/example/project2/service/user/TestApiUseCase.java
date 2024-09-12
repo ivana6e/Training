@@ -1,4 +1,4 @@
-package com.example.project2.service;
+package com.example.project2.service.user;
 
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;

@@ -1,7 +1,7 @@
 package com.example.project2.controller;
 
-import com.example.project2.pojo.*;
-import com.example.project2.service.*;
+import com.example.project2.pojo.user.*;
+import com.example.project2.service.user.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

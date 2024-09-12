@@ -27,7 +27,8 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<!-- <java.version>17</java.version> -->
+		<spring.profiles.active>dev</spring.profiles.active>
 		<!--
 		<jwt.valid-seconds>60</jwt.valid-seconds>
 		-->

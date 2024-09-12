@@ -1,7 +1,7 @@
-package com.example.project2.service;
+package com.example.project2.service.user;
 
-import com.example.project2.pojo.LoginRequest;
-import com.example.project2.pojo.LoginResponse;
+import com.example.project2.pojo.user.LoginRequest;
+import com.example.project2.pojo.user.LoginResponse;
 import com.example.project2.util.JwtUtil;
 import com.example.project2.util.UserDetailsImpl;
 
@@ -28,7 +28,7 @@ public class LoginApiUseCase {
     }
 
     public LoginResponse login(@RequestBody LoginRequest request) {
-        var token = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
+        var token = new UsernamePasswordAuthenticationToken(request.getAccount(), request.getPassword());
         var auth = authenticationManager.authenticate(token);
         var user = (UserDetailsImpl) auth.getPrincipal();
         var jwt = jwtUtil.createLoginAccessToken(user);
@@ -36,7 +36,7 @@ public class LoginApiUseCase {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - {} login successful", time, request.getUsername());
+        log.info("[login time {}] - {} login successful", time, request.getAccount());
 
         return LoginResponse.of(jwt, user);
     }

@@ -1,8 +1,6 @@
 package com.example.project2.controller;
 
-import com.example.project2.service.ClockErrApiUseCase;
-import com.example.project2.service.ClockInApiUseCase;
-import com.example.project2.service.ClockOutApiUseCase;
+import com.example.project2.service.attendance.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,18 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class ClockController {
+public class AttendanceController {
 
     private final ClockInApiUseCase clockInApiUseCase;
     private final ClockOutApiUseCase clockOutApiUseCase;
     private final ClockErrApiUseCase clockErrApiUseCase;
+    private final ClockApiUseCase clockApiUseCase;
     @Autowired
-    public ClockController(ClockInApiUseCase clockInApiUseCase,
-                           ClockOutApiUseCase clockOutApiUseCase,
-                           ClockErrApiUseCase clockErrApiUseCase) {
+    public AttendanceController(ClockInApiUseCase clockInApiUseCase,
+                                ClockOutApiUseCase clockOutApiUseCase,
+                                ClockErrApiUseCase clockErrApiUseCase,
+                                ClockApiUseCase clockApiUseCase) {
         this.clockInApiUseCase = clockInApiUseCase;
         this.clockOutApiUseCase = clockOutApiUseCase;
         this.clockErrApiUseCase = clockErrApiUseCase;
+        this.clockApiUseCase = clockApiUseCase;
     }
 
     @PostMapping("/clock-in")
@@ -37,4 +38,9 @@ public class ClockController {
 
     @PostMapping("/clock-err")
     public ResponseEntity<?> clockErr() throws Exception { return clockErrApiUseCase.clockErr(); }
+
+    @PostMapping("/clock")
+    public ResponseEntity<?> clock() {
+        return clockApiUseCase.clock();
+    }
 }

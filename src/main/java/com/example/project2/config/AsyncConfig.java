@@ -10,24 +10,34 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class AsyncConfig {
 
-    @Bean(name = "asyncTaskExecutor")
-    public AsyncTaskExecutor asyncTaskExecutor() {
+    @Bean(name = "ComputeWorkingHoursTaskExecutor")
+    public AsyncTaskExecutor ComputeWorkingHoursTaskExecutor() {
+        int corePoolSie = Runtime.getRuntime().availableProcessors();
+        double taskCostTime = 0.1;
+        int responseTime = 1;
+
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
-        asyncTaskExecutor.setCorePoolSize(3);
-        asyncTaskExecutor.setMaxPoolSize(8);
-        asyncTaskExecutor.setQueueCapacity(8);
-        asyncTaskExecutor.setThreadNamePrefix("(=O.O=)-");
+        // CPU intensive: CPU+1, I/O intensive: CPU*2
+        asyncTaskExecutor.setCorePoolSize(corePoolSie*2);
+        asyncTaskExecutor.setMaxPoolSize(corePoolSie*3);
+        asyncTaskExecutor.setQueueCapacity((int) (corePoolSie/taskCostTime*responseTime));
+        asyncTaskExecutor.setThreadNamePrefix("WorkingHours - ");
         asyncTaskExecutor.initialize();
         return asyncTaskExecutor;
     }
 
-    @Bean(name = "asyncTaskExecutor1")
+    @Bean(name = "LoginInfoTaskExecutor")
     public AsyncTaskExecutor asyncTaskExecutor1() {
+        int corePoolSie = Runtime.getRuntime().availableProcessors();
+        double taskCostTime = 0.1;
+        int responseTime = 1;
+
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
-        asyncTaskExecutor.setCorePoolSize(2);
-        asyncTaskExecutor.setMaxPoolSize(4);
-        asyncTaskExecutor.setQueueCapacity(1);
-        asyncTaskExecutor.setThreadNamePrefix("(=1.O=)-");
+        // CPU intensive: CPU+1, I/O intensive: CPU*2
+        asyncTaskExecutor.setCorePoolSize(corePoolSie*2);
+        asyncTaskExecutor.setMaxPoolSize(corePoolSie*3);
+        asyncTaskExecutor.setQueueCapacity((int) (corePoolSie/taskCostTime*responseTime));
+        asyncTaskExecutor.setThreadNamePrefix("LoginInfo - ");
         asyncTaskExecutor.initialize();
         return asyncTaskExecutor;
     }

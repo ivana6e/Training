@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class LoginActivity {
+public class LoginInfoDo {
 
     private String name;
     private LocalDateTime loginTime;
     @Getter
     private boolean notified = false;
 
-    public static LoginActivity of(String name, LocalDateTime loginTime) {
-        var activity = new LoginActivity();
+    public static LoginInfoDo of(String name, LocalDateTime loginTime) {
+        var activity = new LoginInfoDo();
         activity.name = name;
         activity.loginTime = loginTime;
         return activity;

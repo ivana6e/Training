@@ -7,13 +7,15 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+// @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = Exception.class)
+    /*@ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.ofNullable(ErrorResponse.builder(e, HttpStatus.NOT_ACCEPTABLE, "clock").build());
     }
+
+     */
 }

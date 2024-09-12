@@ -1,12 +1,11 @@
 package com.example.project2.util;
 
-import com.example.project2.pojo.UserAuthority;
-import com.example.project2.pojo.UserDo;
+import com.example.project2.pojo.user.UserAuthority;
+import com.example.project2.pojo.user.UserDo;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -17,7 +16,7 @@ import java.util.List;
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
-    private String username;
+    private String account;
     private String password;
     private String name;
     // private List<UserAuthority> userAuthorities;
@@ -27,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(UserDo userDo) {
         this.id = userDo.getId();
-        this.username = userDo.getUsername();
+        this.account = userDo.getAccount();
         this.password = userDo.getPassword();
         this.name = userDo.getName();
         // this.userAuthorities = userDo.getUserAuthorities();
@@ -39,8 +38,12 @@ public class UserDetailsImpl implements UserDetails {
                 .map(Enum::name)
                 .map(SimpleGrantedAuthority::new)
                 .toList();
-
-         */
+        */
         return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return "no username";
     }
 }

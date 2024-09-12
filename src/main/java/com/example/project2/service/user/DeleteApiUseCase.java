@@ -1,6 +1,6 @@
-package com.example.project2.service;
+package com.example.project2.service.user;
 
-import com.example.project2.dao.UserDao;
+import com.example.project2.dao.UserJpaRepository;
 import com.example.project2.util.UserDetailsImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class DeleteApiUseCase {
 
-    private final UserDao userDao;
+    private final UserJpaRepository userJpaRepository;
     @Autowired
-    public DeleteApiUseCase(UserDao userDao) {
-        this.userDao = userDao;
+    public DeleteApiUseCase(UserJpaRepository userJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
     }
 
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
@@ -31,12 +31,12 @@ public class DeleteApiUseCase {
         }
 
         var userDetails = (UserDetailsImpl) principal;
-        userDao.deleteById(userDetails.getId());
+        userJpaRepository.deleteById(userDetails.getId());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = now.format(formatter);
-        log.info("[{}] - {} is deleted", time, userDetails.getUsername());
+        log.info("[delete time {}] - {} is deleted", time, userDetails.getAccount());
 
         return ResponseEntity.noContent().build();
     }

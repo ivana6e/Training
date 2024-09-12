@@ -1,8 +1,8 @@
-package com.example.project2.service;
+package com.example.project2.service.attendance;
 
-import com.example.project2.dao.ClockDao;
-import com.example.project2.pojo.ClockDo;
-import com.example.project2.pojo.ClockUPK;
+import com.example.project2.dao.AttendanceJpaRepository;
+import com.example.project2.pojo.attendance.AttendanceDo;
+import com.example.project2.pojo.attendance.AttendanceUPK;
 import com.example.project2.util.UserDetailsImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,45 +22,45 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class ClockErrApiUseCase {
 
-    private final ClockDao clockDao;
+    private final AttendanceJpaRepository attendanceJpaRepository;
     @Autowired
-    public ClockErrApiUseCase(ClockDao clockDao) {
-        this.clockDao = clockDao;
+    public ClockErrApiUseCase(AttendanceJpaRepository attendanceJpaRepository) {
+        this.attendanceJpaRepository = attendanceJpaRepository;
     }
 
     @Transactional // (rollbackFor = Exception.class)
     public ResponseEntity<?> clockErr() throws Exception {
-        var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        /*var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if("anonymousUser".equals(principal)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are an anonymous user");
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String datetime = now.format(formatter);
 
-        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = now.format(dayFormatter);
 
         // DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss");
         // String time = now.format(timeFormatter);
 
         var userDetails = (UserDetailsImpl) principal;
-        ClockUPK clockUPK = new ClockUPK();
-        clockUPK.setId(userDetails.getId());
-        clockUPK.setDate(date);
-        var clockPo = clockDao.findById(clockUPK);
+        AttendanceUPK attendanceUPK = new AttendanceUPK();
+        attendanceUPK.setAccountId(userDetails.getId());
+        attendanceUPK.setDate(date);
+        var attendancePo = attendanceJpaRepository.findById(attendanceUPK);
 
-        ClockDo clockDo;
-        if(clockPo.isEmpty()) {
-            clockDo = new ClockDo();
-            clockDo.setId(userDetails.getId());
-            clockDo.setDate(date);
-            clockDo.setClockIn(Timestamp.valueOf(LocalDateTime.now()));
-            clockDo.setMessage("failed to clock in");
-            clockDao.save(clockDo);
+        AttendanceDo attendanceDo;
+        if(attendancePo.isEmpty()) {
+            attendanceDo = new AttendanceDo();
+            attendanceDo.setAccountId(userDetails.getId());
+            attendanceDo.setDate(date);
+            attendanceDo.setClockIn(Timestamp.valueOf(LocalDateTime.now()));
+            attendanceDo.setState("failed to clock in");
+            attendanceJpaRepository.save(attendanceDo);
 
-            log.info("[{}] - {} failed to clock in", datetime, userDetails.getUsername());
+            log.info("[clock in time {}] - {} failed to clock in", datetime, userDetails.getAccount());
             log.debug("failed to clocked in");
 
             // manually
@@ -70,5 +70,8 @@ public class ClockErrApiUseCase {
         }
 
         return ResponseEntity.noContent().build();
+        */
+
+        return null;
     }
 }

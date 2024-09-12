@@ -1,12 +1,9 @@
-package com.example.project2.pojo;
+package com.example.project2.pojo.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -20,18 +17,19 @@ public class UserDo {
     private Long id;
 
     @NotBlank
-    @Column(name = "username", length = 20, nullable = false)
-    private String username;
+    @Column(name = "account", length = 30, unique = true)
+    private String account;
 
     @NotBlank
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", length = 100)
     private String password;
 
     @NotBlank
-    @Column(name = "name", length = 30)
+    @Column(name = "name", length = 50)
     private String name;
 
-    // @NotBlank
-    // @Column(name = "authorities", nullable = false)
-    // private List<UserAuthority> userAuthorities = new ArrayList<>();
+    /*@NotBlank
+    @Column(name = "authorities", nullable = false)
+    private List<UserAuthority> userAuthorities = new ArrayList<>();
+     */
 }
