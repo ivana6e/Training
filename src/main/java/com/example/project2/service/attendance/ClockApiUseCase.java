@@ -67,21 +67,11 @@ public class ClockApiUseCase {
         } else {
             attendanceDo = attendancePo.get();
 
-            if(LocalTime.now().isBefore(LocalTime.parse("12:00:00"))) {
-                log.info("[clock in time {}] - {} already clocked in", datetime, userDetails.getAccount());
-                log.debug("already clocked in");
-            } else {
-                attendanceDo.setClockOut(Timestamp.valueOf(LocalDateTime.now()));
-                attendanceJpaRepository.save(attendanceDo);
+            attendanceDo.setClockOut(Timestamp.valueOf(LocalDateTime.now()));
+            attendanceJpaRepository.save(attendanceDo);
 
-                if(attendanceDo.getClockIn() == null) {
-                    log.info("[clock out time {}] - {} clocked out successfully(no clock in)", datetime, userDetails.getAccount());
-                    log.debug("clocked out successfully(no clock in)");
-                } else {
-                    log.info("[clock out time {}] - {} clocked out successfully", datetime, userDetails.getAccount());
-                    log.debug("clocked out successfully");
-                }
-            }
+            log.info("[clock out time {}] - {} clocked out successfully", datetime, userDetails.getAccount());
+            log.debug("clocked out successfully");
         }
 
         return ResponseEntity.ok(attendanceDo);
